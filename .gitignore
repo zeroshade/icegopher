@@ -19,3 +19,9 @@
 
 # Go workspace file
 go.work
+
+# VS Code preferences
+.vscode
+
+# temp testing data
+testdata
