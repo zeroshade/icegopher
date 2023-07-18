@@ -371,11 +371,11 @@ type typedLiteral[L LiteralType] interface {
 }
 
 func withinBounds(typ icegopher.Type, literal Literal, lowerBounds, upperBounds []byte) bool {
-	lowerBoundLiteral, err := litFromBytes(typ, lowerBounds)
+	lowerBoundLiteral, err := LiteralFromBytes(typ, lowerBounds)
 	if err != nil {
 		panic(err)
 	}
-	upperBoundLiteral, err := litFromBytes(typ, upperBounds)
+	upperBoundLiteral, err := LiteralFromBytes(typ, upperBounds)
 	if err != nil {
 		panic(err)
 	}

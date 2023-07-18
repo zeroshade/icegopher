@@ -15,7 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package table
+package scanner
 
 import (
 	"fmt"
@@ -24,6 +24,7 @@ import (
 	"github.com/zeroshade/icegopher"
 	"github.com/zeroshade/icegopher/expressions"
 	"github.com/zeroshade/icegopher/io"
+	"github.com/zeroshade/icegopher/table"
 
 	"golang.org/x/exp/slices"
 )
@@ -33,7 +34,7 @@ type TableScan interface {
 }
 
 type tableScan struct {
-	table          *Table
+	table          *table.Table
 	selectedFields []string
 	caseSensitive  bool
 	snapshotID     *int64
@@ -43,7 +44,7 @@ type tableScan struct {
 	rowFilter expressions.BooleanExpression
 }
 
-func (t tableScan) Snapshot() *Snapshot {
+func (t tableScan) Snapshot() *table.Snapshot {
 	if t.snapshotID != nil {
 		return t.table.SnapshotByID(*t.snapshotID)
 	}

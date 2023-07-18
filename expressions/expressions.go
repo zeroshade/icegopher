@@ -149,25 +149,7 @@ func (u *unboundLiteralPredicate) bind(s *icegopher.Schema, caseInsensitive bool
 		return
 	}
 
-	// cast literal
-
-	// switch dt := bound.field.Type.(type) {
-	// case icegopher.BooleanType:
-
-	// case icegopher.Int32Type:
-	// case icegopher.Int64Type:
-	// case icegopher.Float32Type:
-	// case icegopher.Float64Type:
-	// case icegopher.DecimalType:
-	// case icegopher.FixedType:
-	// case icegopher.DateType:
-	// case icegopher.TimeType:
-	// case icegopher.TimestampType:
-	// case icegopher.UUIDType:
-	// case icegopher.BinaryType:
-	// case icegopher.StringType:
-	// }
-	ret.literal = u.literal
+	ret.literal, err = u.literal.To(ret.term.Ref().field.Type)
 	return
 }
 

@@ -358,6 +358,8 @@ func (m *MapType) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+func FixedTypeOf(n int) FixedType { return FixedType{len: n} }
+
 type FixedType struct {
 	len int
 }
@@ -373,6 +375,10 @@ func (f FixedType) Equals(other Type) bool {
 func (f FixedType) Len() int       { return f.len }
 func (f FixedType) Type() string   { return fmt.Sprintf("fixed[%d]", f.len) }
 func (f FixedType) String() string { return fmt.Sprintf("fixed[%d]", f.len) }
+
+func DecimalTypeOf(prec, scale int) DecimalType {
+	return DecimalType{precision: prec, scale: scale}
+}
 
 type DecimalType struct {
 	precision, scale int
@@ -390,6 +396,8 @@ func (d DecimalType) Equals(other Type) bool {
 
 func (d DecimalType) Type() string   { return fmt.Sprintf("decimal(%d, %d)", d.precision, d.scale) }
 func (d DecimalType) String() string { return fmt.Sprintf("decimal(%d, %d)", d.precision, d.scale) }
+func (d DecimalType) Precision() int { return d.precision }
+func (d DecimalType) Scale() int     { return d.scale }
 
 type PrimitiveType interface {
 	Type
